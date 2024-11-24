@@ -1,0 +1,107 @@
+{% extends "ProyectoWebApp/base.html" %}
+{% load static %}
+
+{% block content %}
+  <style>
+    .alert {
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+    .alert-success {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .alert-error {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .hero-section {
+      background: linear-gradient(to right, #34495e, #2c3e50);
+      color: white;
+      padding: 50px 0;
+      text-align: center;
+      animation: fadeIn 2s ease-in;
+    }
+
+    .cta-button {
+      background-color: #e67e22;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .cta-button:hover {
+      background-color: #d35400;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+      transform: scale(1.05);
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-form input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .contact-form button {
+      background-color: #27ae60;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .contact-form button:hover {
+      background-color: #2ecc71;
+    }
+  </style>
+
+  <!-- Mostrar mensajes de Django -->
+  {% if messages %}
+    <div>
+      {% for message in messages %}
+        <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-error{% endif %}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <h1>Crear Pasajero</h1>
+    <p>Ingresa los detalles del pasajero para agregarlo al sistema.</p>
+  </section>
+
+  <!-- Formulario de Creación de Pasajero -->
+  <section class="contact-form">
+    <form method="POST" action="{% url 'crear_pasajero' %}">
+      {% csrf_token %}
+      <input type="text" name="nombre" placeholder="Nombre" required>
+      <input type="text" name="apellido" placeholder="Apellido" required>
+      <input type="text" name="dni" placeholder="DNI" required>
+      <input type="email" name="email" placeholder="Correo electrónico" required>
+      <input type="tel" name="telefono" placeholder="Teléfono">
+      <button type="submit">Crear Pasajero</button>
+    </form>
+  </section>
+{% endblock %}

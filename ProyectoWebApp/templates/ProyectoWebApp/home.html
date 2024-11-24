@@ -1,0 +1,170 @@
+{% extends "ProyectoWebApp/base.html" %}
+{% load static %}
+
+{% block content %}
+  <style>
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(to right, #34495e, #2c3e50);
+      color: white;
+      padding: 50px 0;
+      text-align: center;
+      animation: fadeIn 2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .cta-button {
+      background-color: #e67e22;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .cta-button:hover {
+      background-color: #d35400;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+      transform: scale(1.05);
+    }
+
+    /* General */
+    .section {
+      padding: 50px 15px;
+      text-align: center;
+    }
+
+    /* Cambiar color y sombra de los títulos */
+    .section-title {
+      font-family: 'Arial', sans-serif;
+      font-size: 2rem;
+      color: #e67e22; /* Color naranja */
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra para resaltar */
+    }
+
+    /* Cambiar fondo de las secciones */
+    .services, .destinations, .contact {
+      background-color: #ecf0f1;  /* Fondo claro para las secciones */
+    }
+
+    /* Services Section */
+    .service-items {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .service-item {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 300px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .service-image {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    /* Destinations Section */
+    .destination-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .destination-item {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 300px;
+    }
+
+    .destination-image {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    /* Contact Section */
+    .contact {
+      background-color: #27ae60;
+      color: white;
+      padding: 50px 15px;
+    }
+
+    .contact .cta-button {
+      background-color: white;
+      color: #27ae60;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .contact .cta-button:hover {
+      background-color: #fff;
+      color: #2ecc71;
+    }
+  </style>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <h1>¡Explora el mundo con nosotros!</h1>
+    <p>Encuentra las mejores ofertas de vuelos nacionales e internacionales.</p>
+    <a href="{% url 'crear_vuelo' %}" class="cta-button">Reserva ahora</a>
+  </section>
+
+  <!-- Services Section -->
+  <section class="section services">
+    <h2 class="section-title">Nuestros Servicios</h2>
+    <div class="service-items">
+      <div class="service-item">
+        <img src="{% static 'img/CALUGA_GRANDE_MOB_37c6a3b6ac.jpg' %}" alt="Vuelos nacionales" class="service-image">
+        <h3>Vuelos Nacionales</h3>
+        <p>Conexiones cómodas y asequibles a lo largo de todo el país.</p>
+      </div>
+      <div class="service-item">
+        <img src="{% static 'img/plane-841441_1280_1.jpg' %}" alt="Vuelos internacionales" class="service-image">
+        <h3>Vuelos Internacionales</h3>
+        <p>Explora el mundo con nuestras ofertas en vuelos internacionales.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Destinations Section -->
+  <section class="section destinations">
+    <h2 class="section-title">Destinos Populares</h2>
+    <div class="destination-list">
+      <div class="destination-item">
+        <img src="{% static 'img/eiffel-tower-in-paris-151-medium.jpg' %}" alt="París" class="destination-image">
+        <h3>París</h3>
+        <p>La ciudad del amor y la luz. ¡Un destino imperdible!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <h2 class="section-title">¿Listo para tu próximo viaje?</h2>
+    <p>Contáctanos y organiza el viaje de tus sueños.</p>
+    <a href="{% url 'contacto' %}" class="cta-button">Contáctanos</a>
+  </section>
+{% endblock %}

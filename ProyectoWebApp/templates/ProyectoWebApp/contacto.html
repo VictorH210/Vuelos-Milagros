@@ -1,0 +1,157 @@
+{% extends "ProyectoWebApp/base.html" %}
+{% load static %}
+
+{% block content %}
+  <style>
+    /* Estilos personalizados */
+    .alert {
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+    .alert-success {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .alert-error {
+      background-color: #f44336;
+      color: white;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(to right, #34495e, #2c3e50);
+      color: white;
+      padding: 50px 0;
+      text-align: center;
+      animation: fadeIn 2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .cta-button {
+      background-color: #e67e22;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .cta-button:hover {
+      background-color: #d35400;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+      transform: scale(1.05);
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 50px 15px;
+      background-color: #ecf0f1;
+      text-align: center;
+    }
+
+    .contact-title {
+      font-family: 'Arial', sans-serif;
+      font-size: 2rem;
+      color: #e67e22;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    .contact-form button {
+      background-color: #27ae60;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .contact-form button:hover {
+      background-color: #2ecc71;
+    }
+
+    .contact-info {
+      margin-top: 30px;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    .contact-info a {
+      color: #e67e22;
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  <!-- Mostrar mensajes de Django -->
+  {% if messages %}
+    <div>
+      {% for message in messages %}
+        <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-error{% endif %}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <h1>Contáctanos</h1>
+    <p>¿Listo para tu próxima aventura? ¡Estamos aquí para ayudarte a hacerla realidad!</p>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <h2 class="contact-title">¿Tienes alguna pregunta? ¡Nos encantaría ayudarte!</h2>
+    
+    <div class="contact-form">
+      <form method="POST" action="{% url 'enviar_contacto' %}">
+        {% csrf_token %}
+        <input type="text" name="nombre" placeholder="Tu nombre" required>
+        <input type="email" name="email" placeholder="Tu correo electrónico" required>
+        <textarea name="mensaje" placeholder="Tu mensaje" required></textarea>
+        <button type="submit">Enviar mensaje</button>
+      </form>
+    </div>
+
+    <div class="contact-info">
+      <p>Si prefieres llamarnos, puedes encontrarnos en:</p>
+      <p><strong>Teléfono:</strong> +1 234 567 890</p>
+    </div>
+  </section>
+{% endblock %}
